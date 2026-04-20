@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teya portal · A2 · Strict 4-tab · sales</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body data-variant="A2" data-page="sales">
+
+<div class="control-bar">
+  <h1>Teya portal — nav <span>v6 · multi-file</span></h1>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <div class="control-group">
+      <a class="control-btn" data-opt="A" data-current-page="sales" href="../a/sales.html">A</a>
+      <a class="control-btn sub active" data-opt="A2" data-current-page="sales" href="../a2/sales.html">A2 · Strict 4-tab</a>
+    </div>
+    <div class="control-group">
+      <a class="control-btn" data-opt="B" data-current-page="sales" href="../b/sales.html">B</a>
+      <a class="control-btn sub" data-opt="B3" data-current-page="sales" href="../b3/sales.html">B3 · Role-aware</a>
+    </div>
+    <div class="control-group">
+      <a class="control-btn" data-opt="C" data-current-page="sales" href="../c/sales.html">C</a>
+      <a class="control-btn sub" data-opt="C2" data-current-page="sales" href="../c2/sales.html">C2 · Verbs in nav</a>
+      <a class="control-btn sub" data-opt="C3" data-current-page="sales" href="../c3/sales.html">C3 · Search-first</a>
+    </div>
+  </div>
+  <div class="controls-right">
+
+    <button class="toggle-btn" id="annotBtn" type="button">Show data signals</button>
+  </div>
+</div>
+
+<div class="legend-strip">
+  <strong>Annotations on.</strong>
+  <span>Purple tags = data signals behind each placement.</span>
+</div>
+
+<div class="biz-modal-backdrop" id="bizModal">
+  <div class="biz-modal">
+    <div class="biz-modal-close" data-action="close-biz-modal">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </div>
+    <div class="biz-hero">
+      <div class="biz-hero-avatar">🧅</div>
+      <div class="biz-hero-name">Onion Garden</div>
+      <div class="biz-hero-sub">Starter plan · 4 stores</div>
+    </div>
+    <div class="biz-featured">
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon plan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/></svg></div>
+        <div class="biz-feature-title">Starter plan</div>
+        <div class="biz-feature-sub">Your plan</div>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-machine"></div>
+        <div class="biz-feature-title">Card machines</div>
+        <div class="biz-feature-sub">4 units</div>
+      </div>
+    </div>
+    <div class="biz-menu-group">
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18l-2 13H5L3 7z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Stores <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7M5 10v11M19 10v11M9 21V14h6v7"/></svg>Bank accounts <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>Teams and permissions <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/></svg>Integrations <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>Financial documents <span class="chev">›</span></div>
+    </div>
+    <div class="biz-menu-group">
+      <a class="biz-menu-item" href="./settings.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82"/></svg>Settings <span class="chev">›</span></a>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Help <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout <span class="chev">›</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="portal-frame active" id="frame-A2">
+  <aside class="sidebar">
+
+    <div class="sidebar-logo"><div class="logo-mark">T</div><div class="logo-text">Teya</div></div>
+    <div class="biz-switcher" data-action="open-biz-modal">
+      <div class="biz-avatar">🧅</div>
+      <div class="biz-info"><div class="biz-name">Onion Garden</div><div class="biz-sub">Starter · 4 stores</div></div>
+      <div class="biz-chev">⌄</div>
+    </div>
+    <a class="nav-item" href="./home.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 4l9 8v9a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1v-9z"/></svg>Home</a>
+    <a class="nav-item parent active" href="./sales.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="6" width="4" height="15"/></svg>Sales</a>
+    <a class="nav-item parent" href="./money.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg>Money</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.39 5.82L20 10"/></svg>Teya AI</a>
+
+    <a class="nav-item parent" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="8" cy="12" r="1" fill="currentColor"/><circle cx="12" cy="12" r="1" fill="currentColor"/><circle cx="16" cy="12" r="1" fill="currentColor"/></svg>More<span class="annot">7 items · still too many</span></a>
+    <div style="padding:4px 0 4px 28px;background:var(--teya-surface);border-radius:6px;margin-top:4px">
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Stores</div>
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Bank accounts</div>
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Teams and permissions</div>
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Integrations</div>
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Financial documents</div>
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Reports</div>
+      <div style="padding:5px 10px;font-size:12.5px;color:var(--teya-ink-2);cursor:pointer">Settings</div>
+    </div>
+    <div class="sidebar-footer">
+      <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Help</a>
+    </div>
+  
+  </aside>
+  <main class="main">
+<div class="content-header">
+  <div><h2 class="content-title">Sales</h2><div class="content-sub">Placeholder — content not yet built</div></div>
+  <div class="page-actions"><div class="avatar-sm">NN</div></div>
+</div>
+<div class="panel" style="margin-top:16px;padding:32px;text-align:center;">
+  <div style="font-size:13px;color:var(--teya-ink-3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Placeholder</div>
+  <div style="font-size:20px;font-weight:500;margin-bottom:8px;">Sales</div>
+  <div style="font-size:13px;color:var(--teya-ink-2);max-width:420px;margin:0 auto;">Sales dashboard placeholder — where Overview, Transactions, and Payment links would live.</div>
+</div>
+
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>
