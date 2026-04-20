@@ -377,20 +377,6 @@
     color: var(--teya-ink-3);
   }
   .nav-item.active.parent::after { color: #FFF; }
-  .nav-item.hidden-role { display: none; }
-
-  .role-indicator {
-    display: inline-block;
-    padding: 1px 6px;
-    font-size: 9px;
-    border-radius: 3px;
-    margin-left: auto;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-  }
-  .role-indicator.owner { background: var(--teya-yellow-soft); color: var(--teya-green-dark); }
-  .role-indicator.reader { background: var(--teya-purple-soft); color: var(--teya-purple-ink); }
-
   .annot {
     display: none;
     background: var(--annot-bg);
@@ -408,7 +394,6 @@
   body.show-annot .annot { display: inline-block; }
   body.show-annot .nav-item .badge { display: none; }
   body.show-annot .nav-item.parent::after { display: none; }
-  body.show-annot .role-indicator { display: none; }
 
   .sidebar-footer {
     margin-top: 24px;
@@ -925,7 +910,6 @@
       <button class="control-btn active" data-opt="A" onclick="selectOption('A')">A</button>
       <button class="control-btn sub" data-opt="A2" onclick="selectOption('A2')">A2 · Strict 4-tab</button>
       <button class="control-btn" data-opt="B" onclick="selectOption('B')">B</button>
-      <button class="control-btn sub" data-opt="B3" onclick="selectOption('B3')">B3 · Role-aware</button>
       <button class="control-btn" data-opt="C" onclick="selectOption('C')">C</button>
       <button class="control-btn sub" data-opt="C2" onclick="selectOption('C2')">C2 · Verbs-in-nav</button>
       <button class="control-btn sub" data-opt="C3" onclick="selectOption('C3')">C3 · Search-first</button>
@@ -936,11 +920,6 @@
     </div>
   </div>
   <div class="controls-right">
-    <div class="control-group" id="roleGroup" style="display:none;background:#1F1F1F">
-      <button class="control-btn active" data-role="owner" onclick="setRole('owner')">Owner</button>
-      <button class="control-btn" data-role="member" onclick="setRole('member')">Member</button>
-      <button class="control-btn" data-role="reader" onclick="setRole('reader')">Reader</button>
-    </div>
     <button class="toggle-btn" id="annotBtn" onclick="toggleAnnot()">Show data signals</button>
   </div>
 </div>
@@ -1035,15 +1014,6 @@
   <div class="pillars">
     <span class="v6-tag"><strong>v6:</strong> Financial documents promoted</span>
     <span class="v6-tag"><strong>v6:</strong> Teams and permissions (plural)</span>
-  </div>
-</div>
-<div class="option-desc" id="desc-B3">
-  <h2>Option B3 — Role-aware + hybrid Settings</h2>
-  <p>Same as B with role-based filtering. Financial documents is key for Readers (accountants download statements). Settings page previews the hybrid split — primary items accessible both from sidebar AND Settings. Use page switcher (Home / Settings) and role switcher to compare.</p>
-  <div class="pillars">
-    <span class="sub-tag"><strong>Variant of B</strong></span>
-    <span class="v6-tag"><strong>v6:</strong> hybrid Settings page built</span>
-    <span class="pillar-tag"><strong>Target:</strong> 0 web invites + 3.4k settings visitors</span>
   </div>
 </div>
 <div class="option-desc" id="desc-C">
@@ -1403,127 +1373,6 @@
   </main>
 </div>
 
-<!-- ===== FRAME B3 ===== -->
-<div class="portal-frame" id="frame-B3">
-  <aside class="sidebar" id="sidebarB3">
-    <div class="sidebar-logo"><div class="logo-mark">T</div><div class="logo-text">Teya</div></div>
-    <div class="biz-switcher" onclick="openBizModal()">
-      <div class="biz-avatar">🧅</div>
-      <div class="biz-info"><div class="biz-name">Onion Garden</div><div class="biz-sub" id="b3RoleSub">Starter · 4 stores · Owner</div></div>
-      <div class="biz-chev">⌄</div>
-    </div>
-    <div class="nav-item active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 4l9 8v9a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1v-9z"/></svg>Home</div>
-    <div class="nav-section-label">Operations</div>
-    <div class="nav-item" data-roles="owner member reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="6" width="4" height="15"/></svg>Sales</div>
-    <div class="nav-item" data-roles="owner member reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4z"/></svg>Transactions</div>
-    <div class="nav-item" data-roles="owner member"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54"/></svg>Payment links</div>
-    <div class="nav-section-label">Money</div>
-    <div class="nav-item" data-roles="owner reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg>Money overview</div>
-    <div class="nav-item" data-roles="owner member reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/></svg>Settlements</div>
-    <div class="nav-item" data-roles="owner"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7"/></svg>Bank accounts<span class="role-indicator owner">OWNER</span></div>
-    <div class="nav-item" data-roles="owner"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4"/></svg>Transfers<span class="role-indicator owner">OWNER</span></div>
-    <div class="nav-item" data-roles="owner"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22"/></svg>Funding<span class="role-indicator owner">OWNER</span></div>
-    <div class="nav-section-label">Business</div>
-    <div class="nav-item" data-roles="owner"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/></svg>Teams and permissions<span class="role-indicator owner">OWNER</span></div>
-    <div class="nav-item" data-roles="owner member"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18l-2 13H5L3 7z"/></svg>Stores</div>
-    <div class="nav-item" data-roles="owner"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg>Integrations<span class="role-indicator owner">OWNER</span></div>
-    <div class="nav-section-label">Records & insights</div>
-    <div class="nav-item" data-roles="owner reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/></svg>Financial documents<span class="role-indicator reader">READER</span><span class="annot">key for accountants</span></div>
-    <div class="nav-item" data-roles="owner reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16"/></svg>Reports<span class="role-indicator reader">READER</span></div>
-    <div class="nav-item" data-roles="owner member reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.39 5.82L20 10"/></svg>Teya AI</div>
-    <div class="sidebar-footer">
-      <div class="nav-item" data-roles="owner member reader" onclick="selectPage('settings')"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/></svg>Settings</div>
-      <div class="nav-item" data-roles="owner member reader"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>Help</div>
-    </div>
-  </aside>
-  <main class="main">
-    <div class="page-home active">
-      <div class="content-header">
-        <div>
-          <h2 class="content-title">Good afternoon, Nana<span class="role-context" id="b3RoleContext">Owner view</span></h2>
-          <div class="content-sub" id="b3RoleDesc">Full access · Onion Garden · 4 stores</div>
-        </div>
-        <div class="page-actions"><div class="avatar-sm">NN</div></div>
-      </div>
-      <div class="insight-banner">
-        <strong>B3 v6:</strong> Settings page preview now available — click page switcher (Home / Settings) to see the hybrid model. Role switcher top-right adjusts sidebar visibility. Reader view makes Financial documents the primary destination.
-      </div>
-      <div class="ai-cta">
-        <div class="ai-cta-spark">✦</div>
-        <input placeholder='Ask Teya AI...' />
-        <button class="ai-cta-send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
-      </div>
-      <div class="ai-chips">
-        <div class="ai-chip">Download November statement</div>
-        <div class="ai-chip">Why is basket down this week?</div>
-        <div class="ai-chip">Show refunds over £50</div>
-      </div>
-      <div class="hero-row" id="b3Hero">
-        <div class="hero-left">
-          <div class="hero-label">Available balance · Bank account</div>
-          <div class="hero-value">£26,639.99</div>
-          <div class="hero-actions"><button class="btn-primary">Sell</button><button class="btn-secondary">Pay</button><button class="btn-secondary">Pay by link</button></div>
-        </div>
-      </div>
-      <div class="with-rail">
-        <div>
-          <div class="stat-grid" id="b3Stats">
-            <div class="stat-card"><div class="stat-head"><span class="stat-label">Gross sales today</span><span class="live-dot">Live</span></div><div class="stat-value">£2,653.92</div><div class="stat-sub">123 transactions</div></div>
-            <div class="stat-card"><div class="stat-head"><span class="stat-label">Next settlement</span></div><div class="stat-value">£2,149.36</div><div class="stat-sub" style="margin-top:18px">Paid tomorrow</div></div>
-            <div class="stat-card"><div class="stat-head"><span class="stat-label">Last payout</span></div><div class="stat-value">£1,987.40</div><div class="stat-sub" style="margin-top:18px">Fri · Barclays ••1824</div></div>
-          </div>
-        </div>
-        <aside id="b3Rail">
-          <h4 style="margin:0 0 10px;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--teya-ink-3)">Your business</h4>
-          <div class="biz-tiles">
-            <div class="biz-tile"><div class="biz-tile-icon plan"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/></svg></div><div class="biz-tile-title">Starter plan</div><div class="biz-tile-sub">Your plan</div></div>
-            <div class="biz-tile"><div class="biz-tile-machine"></div><div class="biz-tile-title">Card machines</div><div class="biz-tile-sub">4 units</div></div>
-          </div>
-          <div class="rail-section">
-            <h4>Needs review</h4>
-            <div class="rail-item"><div style="flex:1"><div style="font-weight:500">Transfer approval</div><div style="font-size:11px;color:var(--teya-ink-3)">Alex sent £520</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Review</button></div>
-            <div class="rail-item"><div style="flex:1"><div style="font-weight:500">Chargeback · £87.50</div><div style="font-size:11px;color:var(--teya-ink-3)">Due Wed</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Open</button></div>
-          </div>
-        </aside>
-      </div>
-    </div>
-
-    <!-- Settings page for B3 -->
-    <div class="page-settings">
-      <div class="content-header">
-        <div><h2 class="content-title">Settings</h2><div class="content-sub">Business, account, and app preferences</div></div>
-        <div class="page-actions"><div class="avatar-sm">NN</div></div>
-      </div>
-      <div class="insight-banner">
-        <strong>Hybrid Settings (B3).</strong> For a role-aware nav, Settings acts as the universal safety net — anything the role can access appears here too. Members and Readers see fewer items; Owners see all. Green "Also in sidebar" pills mark items duplicated in the primary nav.
-      </div>
-      <div class="settings-page">
-        <div class="settings-group-label">Company</div>
-        <div class="settings-group">
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7M5 10v11M19 10v11M9 21V14h6v7"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Business information</div><div class="settings-item-sub">Manage your company and store</div></div><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18l-2 13H5L3 7z"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Stores</div><div class="settings-item-sub">View and manage your stores</div></div><span class="settings-item-hint">Also in sidebar</span><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Bank accounts</div><div class="settings-item-sub">Accounts where you receive settlements</div></div><span class="settings-item-hint">Also in sidebar</span><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="9" cy="7" r="4"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Teams and permissions</div><div class="settings-item-sub">Define roles and add team members</div></div><span class="settings-item-hint">Also in sidebar</span><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Integrations</div><div class="settings-item-sub">Xero and more</div></div><span class="settings-item-hint">Also in sidebar</span><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Financial documents</div><div class="settings-item-sub">Statements and invoices</div></div><span class="settings-item-hint">Also in sidebar</span><span class="settings-chev">›</span></div>
-        </div>
-
-        <div class="settings-group-label">Account</div>
-        <div class="settings-group">
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Security and privacy</div><div class="settings-item-sub">Password, passcode, linked accounts</div></div><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Reporting preferences</div><div class="settings-item-sub">Daily settlement reports, weekly summaries, fraud alerts</div></div><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Preferences</div><div class="settings-item-sub">Language, currency display, timezone</div></div><span class="settings-chev">›</span></div>
-        </div>
-
-        <div class="settings-group-label">Support</div>
-        <div class="settings-group">
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Help</div><div class="settings-item-sub">Support resources and contact</div></div><span class="settings-chev">›</span></div>
-          <div class="settings-item"><div class="settings-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg></div><div class="settings-item-content"><div class="settings-item-title">Logout</div><div class="settings-item-sub">End your session</div></div><span class="settings-chev">›</span></div>
-        </div>
-      </div>
-    </div>
-  </main>
-</div>
 
 <!-- ===== FRAME C ===== -->
 <div class="portal-frame" id="frame-C">
@@ -1537,12 +1386,12 @@
     <div class="nav-item active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 4l9 8v9"/></svg>Today</div>
     <div class="job-heading">Get paid</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/></svg>Sales & terminals</div>
+    <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4z"/></svg>Transactions</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54"/></svg>Payment links</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>Subscriptions<span class="badge">NEW</span></div>
     <div class="job-heading">Money</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg>Money overview</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/></svg>Settlements & payouts</div>
-    <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4z"/></svg>Transactions</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7"/></svg>Bank accounts</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4"/></svg>Transfers</div>
     <div class="job-heading">Run the business</div>
@@ -1613,12 +1462,12 @@
     <div class="nav-item active"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 4l9 8v9"/></svg>Home</div>
     <div class="job-heading">Get paid</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/></svg>Sales</div>
+    <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4z"/></svg>Transactions</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54"/></svg>Payment links</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/></svg>Subscriptions<span class="badge">NEW</span></div>
     <div class="job-heading">Money</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/></svg>Money overview</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2v20"/></svg>Settlements</div>
-    <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4z"/></svg>Transactions</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7"/></svg>Bank accounts</div>
     <div class="nav-item"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4"/></svg>Transfers</div>
     <div class="job-heading">Run the business</div>
@@ -1753,8 +1602,7 @@
     document.querySelectorAll('.option-desc').forEach(d => d.classList.remove('active'));
     const desc = document.getElementById('desc-' + opt);
     if (desc) desc.classList.add('active');
-    document.getElementById('roleGroup').style.display = (opt === 'B3') ? 'flex' : 'none';
-    document.getElementById('pageGroup').style.display = (opt === 'A' || opt === 'B3') ? 'flex' : 'none';
+    document.getElementById('pageGroup').style.display = (opt === 'A') ? 'flex' : 'none';
     applyCurrentPage();
     window.scrollTo({top:0, behavior:'instant'});
   }
@@ -1776,45 +1624,6 @@
     closeBizModal();
   }
 
-  function setRole(role) {
-    document.querySelectorAll('#roleGroup .control-btn').forEach(b => b.classList.remove('active'));
-    document.querySelector(`#roleGroup .control-btn[data-role="${role}"]`).classList.add('active');
-    const sidebar = document.getElementById('sidebarB3');
-    const items = sidebar.querySelectorAll('.nav-item[data-roles]');
-    items.forEach(item => {
-      const roles = item.dataset.roles.split(' ');
-      item.classList.toggle('hidden-role', !roles.includes(role));
-    });
-    const labels = {
-      owner: {sub: 'Starter · 4 stores · Owner', context: 'Owner view', desc: 'Full access · Onion Garden · 4 stores'},
-      member: {sub: 'Staff · King\'s Cross', context: 'Member view', desc: 'Operations only · no finance or admin'},
-      reader: {sub: 'Accountant · external', context: 'Reader view', desc: 'Read-only · finance & statements'}
-    };
-    document.getElementById('b3RoleSub').textContent = labels[role].sub;
-    document.getElementById('b3RoleContext').textContent = labels[role].context;
-    document.getElementById('b3RoleDesc').textContent = labels[role].desc;
-
-    const hero = document.querySelector('#b3Hero');
-    if (role === 'owner') {
-      hero.innerHTML = `<div class="hero-left"><div class="hero-label">Available balance · Bank account</div><div class="hero-value">£26,639.99</div><div class="hero-actions"><button class="btn-primary">Sell</button><button class="btn-secondary">Pay</button><button class="btn-secondary">Pay by link</button></div></div>`;
-    } else if (role === 'member') {
-      hero.innerHTML = `<div class="hero-left"><div class="hero-label">Your shift at King's Cross</div><div class="hero-value">£412.50</div><div class="hero-actions"><button class="btn-primary">New sale</button><button class="btn-secondary">Send payment link</button></div></div>`;
-    } else {
-      hero.innerHTML = `<div class="hero-left"><div class="hero-label">April statement · Onion Garden</div><div class="hero-value">£42,871.63</div><div class="hero-actions"><button class="btn-primary">Download statement</button><button class="btn-secondary">March</button><button class="btn-secondary">Q1 summary</button></div></div>`;
-    }
-
-    const rail = document.querySelector('#b3Rail');
-    const planTile = `<div class="biz-tile"><div class="biz-tile-icon plan"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/></svg></div><div class="biz-tile-title">Starter plan</div><div class="biz-tile-sub">Your plan</div></div>`;
-    const cardTile = `<div class="biz-tile"><div class="biz-tile-machine"></div><div class="biz-tile-title">Card machines</div><div class="biz-tile-sub">4 units</div></div>`;
-    if (role === 'owner') {
-      rail.innerHTML = `<h4 style="margin:0 0 10px;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--teya-ink-3)">Your business</h4><div class="biz-tiles">${planTile}${cardTile}</div><div class="rail-section"><h4>Needs review</h4><div class="rail-item"><div style="flex:1"><div style="font-weight:500">Transfer approval</div><div style="font-size:11px;color:var(--teya-ink-3)">Alex sent £520</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Review</button></div><div class="rail-item"><div style="flex:1"><div style="font-weight:500">Chargeback · £87.50</div><div style="font-size:11px;color:var(--teya-ink-3)">Due Wed</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Open</button></div></div>`;
-    } else if (role === 'member') {
-      rail.innerHTML = `<h4 style="margin:0 0 10px;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--teya-ink-3)">This terminal</h4><div class="biz-tiles" style="grid-template-columns:1fr">${cardTile}</div><div class="rail-section"><h4>Your shift</h4><div class="rail-item" style="padding:8px 0"><div style="flex:1"><div style="font-weight:500">18 transactions</div><div style="font-size:11px;color:var(--teya-ink-3)">Since 09:00</div></div></div><div class="rail-item" style="padding:8px 0"><div style="flex:1"><div style="font-weight:500">£22.91</div><div style="font-size:11px;color:var(--teya-ink-3)">Avg basket today</div></div></div></div>`;
-    } else {
-      rail.innerHTML = `<div class="rail-section"><h4>Recent statements</h4><div class="rail-item" style="padding:8px 0"><div style="flex:1"><div style="font-weight:500">March 2026</div><div style="font-size:11px;color:var(--teya-ink-3)">Ready to download</div></div><button class="btn-secondary" style="padding:4px 10px;font-size:11px">Download</button></div><div class="rail-item" style="padding:8px 0"><div style="flex:1"><div style="font-weight:500">February 2026</div><div style="font-size:11px;color:var(--teya-ink-3)">Downloaded</div></div></div><div class="rail-item" style="padding:8px 0"><div style="flex:1"><div style="font-weight:500">Q1 2026 summary</div><div style="font-size:11px;color:var(--teya-ink-3)">VAT-ready</div></div><button class="btn-secondary" style="padding:4px 10px;font-size:11px">Download</button></div></div>`;
-    }
-  }
-
   function openBizModal() {
     document.getElementById('bizModal').classList.add('open');
   }
@@ -1831,7 +1640,6 @@
   }
 
   selectOption('A');
-  setRole('owner');
 </script>
 
 </body>

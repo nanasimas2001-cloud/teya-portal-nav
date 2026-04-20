@@ -1,6 +1,8 @@
 /* Multi-file additions: reset anchors used as nav items */
 a { text-decoration: none; color: inherit; }
 .nav-item, .control-btn, .biz-menu-item, .variant-card { text-decoration: none; color: inherit; }
+.sidebar.collapsed-search .nav-icon { width: 22px; height: 22px; }
+.sidebar.collapsed-search .icon-only { padding: 12px 0; }
 
 :root {
     --teya-yellow: #E8FF4D;
@@ -374,20 +376,6 @@ a { text-decoration: none; color: inherit; }
     color: var(--teya-ink-3);
   }
   .nav-item.active.parent::after { color: #FFF; }
-  .nav-item.hidden-role { display: none; }
-
-  .role-indicator {
-    display: inline-block;
-    padding: 1px 6px;
-    font-size: 9px;
-    border-radius: 3px;
-    margin-left: auto;
-    font-weight: 500;
-    letter-spacing: 0.3px;
-  }
-  .role-indicator.owner { background: var(--teya-yellow-soft); color: var(--teya-green-dark); }
-  .role-indicator.reader { background: var(--teya-purple-soft); color: var(--teya-purple-ink); }
-
   .annot {
     display: none;
     background: var(--annot-bg);
@@ -405,7 +393,6 @@ a { text-decoration: none; color: inherit; }
   body.show-annot .annot { display: inline-block; }
   body.show-annot .nav-item .badge { display: none; }
   body.show-annot .nav-item.parent::after { display: none; }
-  body.show-annot .role-indicator { display: none; }
 
   .sidebar-footer {
     margin-top: 24px;

@@ -50,47 +50,6 @@
     });
   });
 
-  // ---------- Role switcher (B3 only, persisted) ----------
-  var variant = document.body.getAttribute('data-variant');
-  var roleLabels = {
-    owner:  { sub: 'Starter · 4 stores · Owner',     context: 'Owner view',  desc: 'Full access · Onion Garden · 4 stores' },
-    member: { sub: "Staff · King's Cross",           context: 'Member view', desc: 'Operations only · no finance or admin' },
-    reader: { sub: 'Accountant · external',           context: 'Reader view', desc: 'Read-only · finance & statements' }
-  };
-
-  function applyRole(role) {
-    var sidebar = document.getElementById('sidebarB3');
-    if (!sidebar) return;
-    var items = sidebar.querySelectorAll('[data-roles]');
-    items.forEach(function(item) {
-      var roles = (item.dataset.roles || '').split(/\s+/);
-      item.classList.toggle('hidden-role', !roles.includes(role));
-    });
-    document.querySelectorAll('#roleGroup .control-btn').forEach(function(b) {
-      b.classList.toggle('active', b.dataset.role === role);
-    });
-
-    // Optional dynamic bits — only if these elements exist on the current page
-    var bizSub = document.querySelector('.biz-sub[data-role-sub]');
-    if (bizSub) bizSub.textContent = roleLabels[role].sub;
-    var ctx = document.getElementById('b3RoleContext');
-    if (ctx) ctx.textContent = roleLabels[role].context;
-    var desc = document.getElementById('b3RoleDesc');
-    if (desc) desc.textContent = roleLabels[role].desc;
-  }
-
-  if (variant === 'B3') {
-    var role = localStorage.getItem('teyaRole') || 'owner';
-    applyRole(role);
-    document.querySelectorAll('#roleGroup .control-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var r = btn.dataset.role;
-        localStorage.setItem('teyaRole', r);
-        applyRole(r);
-      });
-    });
-  }
-
   // ---------- Variant switcher: preserve current page when possible ----------
   // Build-time hrefs already use data-current-page; no further JS needed.
 })();

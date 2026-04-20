@@ -17,10 +17,56 @@ from pathlib import Path
 ROOT = Path(__file__).parent
 SRC = ROOT / "index.v6.html"
 
-VARIANTS = ["A", "A2", "B", "B3", "C", "C2", "C3"]
+VARIANTS = ["A", "A2", "B", "C", "C2", "C3"]
 VARIANT_SLUGS = {v: v.lower() for v in VARIANTS}
 
 PAGES = ["home", "sales", "money", "financial-documents", "settings"]
+
+# Canonical inner SVG markup per nav label. Clean Lucide-style icons.
+# Keyed by lowercased label; matched by prefix so "Sales & terminals" uses "sales".
+ICONS = {
+    "home":                '<path d="M3 12L12 4l9 8v9a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1v-9z"/>',
+    "today":               '<circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>',
+    "sales":               '<rect x="3" y="12" width="4" height="9"/><rect x="10" y="6" width="4" height="15"/><rect x="17" y="9" width="4" height="12"/>',
+    "transactions":        '<path d="M4 4h16v4H4zM4 12h16v4H4zM4 20h8"/>',
+    "payment links":       '<path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>',
+    "subscriptions":       '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 2v4M16 2v4M2 10h20"/>',
+    "money":               '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/>',
+    "money overview":      '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/>',
+    "settlements":         '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
+    "settlements & payouts": '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
+    "bank accounts":       '<path d="M3 21h18M3 10l9-7 9 7M5 10v11M19 10v11M9 21V14h6v7"/>',
+    "transfers":           '<path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/>',
+    "funding":             '<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
+    "funding & advances":  '<path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
+    "teya ai":             '<path d="M12 3l2.39 5.82L20 10l-4.47 3.88L17 20l-5-3-5 3 1.47-6.12L4 10l5.61-1.18z"/>',
+    "teams and permissions": '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/>',
+    "teams & access":      '<path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/>',
+    "stores":              '<path d="M3 7h18l-2 13H5L3 7z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>',
+    "stores & terminals":  '<path d="M3 7h18l-2 13H5L3 7z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/>',
+    "integrations":        '<rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/>',
+    "financial documents": '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/>',
+    "reports":             '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/>',
+    "reports & exports":   '<rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/>',
+    "settings":            '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/>',
+    "account & security":  '<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>',
+    "help":                '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/>',
+    "help & support":      '<circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/>',
+    "more":                '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    "business menu":       '<circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/>',
+    "documents":           '<path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6"/>',
+}
+
+def icon_for(label):
+    lbl = label.lower().strip()
+    if lbl in ICONS:
+        return ICONS[lbl]
+    # prefix match
+    for key, svg in ICONS.items():
+        if lbl.startswith(key):
+            return svg
+    return None
+
 
 # Label -> page mapping. Case-insensitive, strip whitespace, match exact or partial.
 # Anything not matched here becomes a data-stub link.
@@ -40,7 +86,6 @@ VARIANT_TITLES = {
     "A":  "A · App-faithful",
     "A2": "A2 · Strict 4-tab",
     "B":  "B · Back office",
-    "B3": "B3 · Role-aware",
     "C":  "C · Jobs-based",
     "C2": "C2 · Verbs in nav",
     "C3": "C3 · Search-first",
@@ -50,7 +95,6 @@ VARIANT_DESCS = {
     "A":  "Home, Sales, Money, Teya AI. Business admin in a tray. Closest match to mobile app.",
     "A2": "Strict 4-tab parity with the app. Everything else in More.",
     "B":  "Grouped sidebar back office. Financial documents promoted.",
-    "B3": "Role-aware variant of B with hybrid Settings. Use the role switcher to compare owner/member/reader.",
     "C":  "Jobs-based groups: Get paid / Money / Run the business / Grow.",
     "C2": "Verbs at group level, nouns on items. Strongest label consistency.",
     "C3": "Icon rail + AI-dominant home. Search-first.",
@@ -195,7 +239,9 @@ def rewrite_sidebar_links(aside_inner, current_page):
         if m_roles:
             new_attrs += f' data-roles="{m_roles.group(1)}"'
         stub_attr = ' data-stub="true"' if is_stub else ""
-        return f'<a class="{cls}" href="{href}"{new_attrs}{stub_attr}>{body}</a>'
+        # Replace the SVG's inner markup with the canonical icon for this label
+        new_body = replace_icon_in_body(body, label)
+        return f'<a class="{cls}" href="{href}"{new_attrs}{stub_attr}>{new_body}</a>'
 
     # Match top-level nav-items. Pattern: <div class="nav-item[ ...]" [attrs]>inner</div>
     # We need to be careful not to match divs-within-divs. The inner content has no nested <div class="nav-item">.
@@ -206,7 +252,54 @@ def rewrite_sidebar_links(aside_inner, current_page):
         flags=re.S,
     )
 
+    # Also normalize icons inside icon-only nav-items (C3). These are <div class="icon-only nav-item" title="..."> blocks.
+    def rewrite_icon_only(match):
+        full = match.group(0)
+        # Extract title (label source for icon-only items)
+        title_m = re.search(r'title="([^"]*)"', full)
+        title = title_m.group(1) if title_m else ""
+        body = match.group(1)
+        # Rewrite onclick=openBizModal to data-action
+        full = full.replace('onclick="openBizModal()"', 'data-action="open-biz-modal"')
+        # Rewrite onclick=selectPage('settings') to href
+        if "selectPage('settings')" in full:
+            # Convert the whole div to an anchor pointing at settings
+            full = re.sub(
+                r'onclick="selectPage\(\'settings\'\)"',
+                '',
+                full,
+            )
+        # Replace icon
+        new_body = replace_icon_in_body(body, title)
+        return full.replace(body, new_body, 1) if new_body != body else full
+
+    # Process already-transformed anchors + remaining icon-only divs for icon replacement.
+    # The icon-only items weren't caught by the nav-item regex above because they were re-matched
+    # inside that broader replace. Normalize any remaining icon-only <div class="icon-only nav-item">.
+    aside_inner = re.sub(
+        r'<div class="icon-only nav-item[^"]*"[^>]*>((?:(?!</div>).)*?)</div>',
+        rewrite_icon_only,
+        aside_inner,
+        flags=re.S,
+    )
+
     return aside_inner
+
+
+def replace_icon_in_body(body, label):
+    """Replace the inner markup of the first <svg> in body with the canonical icon for label.
+    If no canonical icon is found, leave body unchanged.
+    """
+    icon = icon_for(label)
+    if not icon:
+        return body
+    return re.sub(
+        r'(<svg\b[^>]*>).*?(</svg>)',
+        lambda m: f"{m.group(1)}{icon}{m.group(2)}",
+        body,
+        count=1,
+        flags=re.S,
+    )
 
 
 def build_control_bar(variant, current_page, depth_prefix=""):
@@ -216,7 +309,7 @@ def build_control_bar(variant, current_page, depth_prefix=""):
     buttons = []
     groups = [
         [("A", False), ("A2", True)],
-        [("B", False), ("B3", True)],
+        [("B", False)],
         [("C", False), ("C2", True), ("C3", True)],
     ]
     for group in groups:
@@ -234,23 +327,12 @@ def build_control_bar(variant, current_page, depth_prefix=""):
         group_html += "    </div>"
         buttons.append(group_html)
 
-    role_group = ""
-    if variant == "B3":
-        role_group = (
-            '    <div class="control-group" id="roleGroup" style="background:#1F1F1F">\n'
-            '      <button class="control-btn active" data-role="owner" type="button">Owner</button>\n'
-            '      <button class="control-btn" data-role="member" type="button">Member</button>\n'
-            '      <button class="control-btn" data-role="reader" type="button">Reader</button>\n'
-            "    </div>"
-        )
-
     return f"""<div class="control-bar">
   <h1>Teya portal — nav <span>v6 · multi-file</span></h1>
   <div style="display:flex;gap:8px;flex-wrap:wrap;">
 {chr(10).join(buttons)}
   </div>
   <div class="controls-right">
-{role_group}
     <button class="toggle-btn" id="annotBtn" type="button">Show data signals</button>
   </div>
 </div>
@@ -322,13 +404,11 @@ def stub_main_content(page):
 '''
 
 
-def build_page(variant, page, aside_inner_with_links, main_content, depth_prefix="../"):
+def build_page(variant, page, aside_inner_with_links, main_content, depth_prefix="../", aside_open=None):
     control_bar = build_control_bar(variant, page, depth_prefix=depth_prefix)
     biz_modal = BIZ_MODAL_HTML
-    aside_open = '<aside class="sidebar">'
-    if variant == "B3":
-        # B3 uses id=sidebarB3 for the role filter script
-        aside_open = '<aside class="sidebar" id="sidebarB3">'
+    if aside_open is None:
+        aside_open = '<aside class="sidebar">'
     main_open = '<main class="main">'
     return f"""<!DOCTYPE html>
 <html lang="en">
@@ -380,7 +460,7 @@ def build_landing(variant_cards_html):
 <body class="landing-body" style="background: var(--teya-surface);">
   <div class="landing">
     <h1>Teya portal — nav exploration</h1>
-    <p class="lead">Seven navigation structures for the desktop portal, each available as a browsable prototype with home, sales, money, financial documents, and settings pages. Use the top bar to switch variants while browsing; use "Show data signals" to see the reasoning behind each placement.</p>
+    <p class="lead">Six navigation structures for the desktop portal, each available as a browsable prototype with home, sales, money, financial documents, and settings pages. Use the top bar to switch variants while browsing; use "Show data signals" to see the reasoning behind each placement.</p>
     <div class="variant-grid">
 {variant_cards_html}
     </div>
@@ -442,47 +522,6 @@ APP_JS = """(function() {
     });
   });
 
-  // ---------- Role switcher (B3 only, persisted) ----------
-  var variant = document.body.getAttribute('data-variant');
-  var roleLabels = {
-    owner:  { sub: 'Starter · 4 stores · Owner',     context: 'Owner view',  desc: 'Full access · Onion Garden · 4 stores' },
-    member: { sub: "Staff · King's Cross",           context: 'Member view', desc: 'Operations only · no finance or admin' },
-    reader: { sub: 'Accountant · external',           context: 'Reader view', desc: 'Read-only · finance & statements' }
-  };
-
-  function applyRole(role) {
-    var sidebar = document.getElementById('sidebarB3');
-    if (!sidebar) return;
-    var items = sidebar.querySelectorAll('[data-roles]');
-    items.forEach(function(item) {
-      var roles = (item.dataset.roles || '').split(/\\s+/);
-      item.classList.toggle('hidden-role', !roles.includes(role));
-    });
-    document.querySelectorAll('#roleGroup .control-btn').forEach(function(b) {
-      b.classList.toggle('active', b.dataset.role === role);
-    });
-
-    // Optional dynamic bits — only if these elements exist on the current page
-    var bizSub = document.querySelector('.biz-sub[data-role-sub]');
-    if (bizSub) bizSub.textContent = roleLabels[role].sub;
-    var ctx = document.getElementById('b3RoleContext');
-    if (ctx) ctx.textContent = roleLabels[role].context;
-    var desc = document.getElementById('b3RoleDesc');
-    if (desc) desc.textContent = roleLabels[role].desc;
-  }
-
-  if (variant === 'B3') {
-    var role = localStorage.getItem('teyaRole') || 'owner';
-    applyRole(role);
-    document.querySelectorAll('#roleGroup .control-btn').forEach(function(btn) {
-      btn.addEventListener('click', function() {
-        var r = btn.dataset.role;
-        localStorage.setItem('teyaRole', r);
-        applyRole(r);
-      });
-    });
-  }
-
   // ---------- Variant switcher: preserve current page when possible ----------
   // Build-time hrefs already use data-current-page; no further JS needed.
 })();
@@ -494,10 +533,13 @@ def main():
     css = extract_css(src)
 
     # Write styles.css — prepend a small reset so <a> nav items match <div> styling
+    # Also scale up icons in the collapsed-search (C3) icon rail so they don't look like dots.
     css_prefix = (
         "/* Multi-file additions: reset anchors used as nav items */\n"
         "a { text-decoration: none; color: inherit; }\n"
-        ".nav-item, .control-btn, .biz-menu-item, .variant-card { text-decoration: none; color: inherit; }\n\n"
+        ".nav-item, .control-btn, .biz-menu-item, .variant-card { text-decoration: none; color: inherit; }\n"
+        ".sidebar.collapsed-search .nav-icon { width: 22px; height: 22px; }\n"
+        ".sidebar.collapsed-search .icon-only { padding: 12px 0; }\n\n"
     )
     (ROOT / "styles.css").write_text(css_prefix + css, encoding="utf-8")
 
@@ -511,6 +553,7 @@ def main():
         parts = extract_aside_and_main(frame_html)
         pages = split_pages_from_main(parts["main_inner"])
         frames[v] = {
+            "aside_open": parts["aside_open"],
             "aside_inner": parts["aside_inner"],
             "pages": pages,  # {'home': str, 'settings': str | None}
         }
@@ -529,7 +572,7 @@ def main():
                 main_content = stub_main_content(page)
             # Rewrite sidebar links for this target page
             aside_inner_links = rewrite_sidebar_links(frames[v]["aside_inner"], page)
-            page_html = build_page(v, page, aside_inner_links, main_content, depth_prefix="../")
+            page_html = build_page(v, page, aside_inner_links, main_content, depth_prefix="../", aside_open=frames[v]["aside_open"])
             (vdir / f"{page}.html").write_text(page_html, encoding="utf-8")
 
     # Generate landing page
