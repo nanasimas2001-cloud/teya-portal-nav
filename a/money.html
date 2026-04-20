@@ -87,7 +87,11 @@
       <a class="nav-child" href="#" data-stub="true">Transactions</a>
       <a class="nav-child" href="#" data-stub="true">Payment links</a>
     </div>
-    <div class="nav-item parent" data-action="toggle-children" data-parent-label="Money"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/></svg>Money</div>
+    <div class="nav-item parent active open" data-action="toggle-children" data-parent-label="Money"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/></svg>Money</div>
+    <div class="nav-children open">
+      <a class="nav-child active" href="./money.html">Overview</a>
+      <a class="nav-child" href="./money.html">Activity</a>
+    </div>
     <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.39 5.82L20 10l-4.47 3.88L17 20l-5-3-5 3 1.47-6.12L4 10l5.61-1.18z"/></svg>Teya AI</a>
 
     <div class="nav-section-label">Business</div>
@@ -105,19 +109,106 @@
   
   </aside>
   <main class="main">
-<div class="content-header">
-  <div><h2 class="content-title">Money</h2><div class="content-sub">Placeholder — content not yet built</div></div>
-  <div class="page-actions"><div class="avatar-sm">NN</div></div>
-</div>
-<div class="panel" style="margin-top:16px;padding:32px;text-align:center;">
-  <div style="font-size:13px;color:var(--teya-ink-3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Placeholder</div>
-  <div style="font-size:20px;font-weight:500;margin-bottom:8px;">Money</div>
-  <div style="font-size:13px;color:var(--teya-ink-2);max-width:420px;margin:0 auto;">Money placeholder — Bank account, Settlements, Transfers, Funding would live here.</div>
-</div>
+    <div class="content-header">
+      <div>
+        <h2 class="content-title">Money</h2>
+      </div>
+      <div class="page-actions"><div class="avatar-sm">NN</div></div>
+    </div>
+
+    <div class="page-tabs" role="tablist">
+      <button class="page-tab active" data-tab="overview" type="button">Overview</button>
+      <button class="page-tab" data-tab="activity" type="button">Activity</button>
+    </div>
+
+    <div class="tab-pane active" data-pane="overview">
+      <div class="filter-row">
+        <button class="time-pill" type="button">This month <span class="chev">⌄</span></button>
+        <div class="spacer"></div>
+        <button class="btn-export" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export
+        </button>
+      </div>
+
+      <div class="money-two-col">
+        <div class="panel">
+          <h3 style="margin:0 0 4px;">Net change this month</h3>
+          <div style="font-size:28px; font-weight:500; letter-spacing:-0.3px; margin-bottom:2px;">+£14,820.76</div>
+          <div style="font-size:12px; color:var(--teya-green); margin-bottom:18px;">↑ 12% vs last month</div>
+          <div class="mini-chart" style="height:160px; gap:6px;">
+            <div class="bar" style="height:30%"></div>
+            <div class="bar" style="height:45%"></div>
+            <div class="bar" style="height:58%"></div>
+            <div class="bar" style="height:72%"></div>
+            <div class="bar" style="height:50%"></div>
+            <div class="bar" style="height:65%"></div>
+            <div class="bar" style="height:85%"></div>
+            <div class="bar" style="height:78%"></div>
+            <div class="bar" style="height:92%"></div>
+            <div class="bar" style="height:68%"></div>
+            <div class="bar" style="height:88%"></div>
+            <div class="bar dim" style="height:40%"></div>
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:8px; font-size:11px; color:var(--teya-ink-3);">
+            <span>1 Apr</span><span>10 Apr</span><span>20 Apr</span>
+          </div>
+        </div>
+        <div>
+          <div class="panel" style="margin-bottom:12px;">
+            <h3 style="margin:0 0 6px;">Cards</h3>
+            <div style="font-size:12px; color:var(--teya-ink-2); margin-bottom:10px;">Physical and virtual company cards · spend tracking and controls.</div>
+            <div style="display:flex; gap:12px; margin-bottom:10px;">
+              <div>
+                <div style="font-size:11px; color:var(--teya-ink-3); text-transform:uppercase; letter-spacing:.4px;">Cards</div>
+                <div style="font-size:18px; font-weight:500;">3 issued</div>
+              </div>
+              <div>
+                <div style="font-size:11px; color:var(--teya-ink-3); text-transform:uppercase; letter-spacing:.4px;">Spent this month</div>
+                <div style="font-size:18px; font-weight:500;">£1,240.80</div>
+              </div>
+            </div>
+            <button class="btn-secondary" style="padding:6px 12px; font-size:12px;">Manage cards</button>
+          </div>
+          <div class="panel" style="background:var(--teya-yellow-faint); border-color:var(--teya-yellow);">
+            <h3 style="margin:0 0 6px;">Flexi-loan</h3>
+            <div style="font-size:12px; color:var(--teya-ink-2); margin-bottom:10px;">£3,000 pre-approved · repayments scaled to your daily takings.</div>
+            <button class="btn-primary" style="padding:7px 14px; font-size:12px;">See terms</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Where it came from</h3>
+        <div class="activity-item"><div class="activity-avatar" style="background:var(--teya-yellow); color:var(--teya-black);">TR</div><div class="activity-info"><div class="activity-name">Card terminals · 4 stores</div><div class="activity-meta">Daily settlements from in-store card payments</div></div><div class="activity-amount amount-pos">+£11,420.15</div></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#CECBF6; color:#3C3489;">PL</div><div class="activity-info"><div class="activity-name">Payment links</div><div class="activity-meta">9 links sent · 6 paid</div></div><div class="activity-amount amount-pos">+£684.50</div></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#9FE1CB; color:#085041;">FN</div><div class="activity-info"><div class="activity-name">Funding top-up</div><div class="activity-meta">15 Apr · Advance disbursement</div></div><div class="activity-amount amount-pos">+£3,000.00</div></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#F7C1C1; color:#501313;">TP</div><div class="activity-info"><div class="activity-name">Transfers paid out</div><div class="activity-meta">22 supplier payments · avg £186</div></div><div class="activity-amount">−£4,090.20</div></div>
+      </div>
+    </div>
+
+    <div class="tab-pane" data-pane="activity">
+      <div class="panel" style="padding: 28px; text-align:center;">
+        <div style="font-size:13px; color:var(--teya-ink-3); text-transform:uppercase; letter-spacing:.4px; margin-bottom:6px;">Placeholder</div>
+        <div style="font-size:18px; font-weight:500; margin-bottom:6px;">Activity content placeholder</div>
+        <div style="font-size:13px; color:var(--teya-ink-2); max-width:480px; margin:0 auto;">Transaction list grouped by date — filtered to account money flows (settlements in, transfers out, card spend, funding events).</div>
+      </div>
+    </div>
 
   </main>
 </div>
 
 <script src="../app.js"></script>
+<script>
+  (function() {
+    document.querySelectorAll('.page-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() {
+        var key = tab.dataset.tab;
+        document.querySelectorAll('.page-tab').forEach(function(t) { t.classList.toggle('active', t === tab); });
+        document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.toggle('active', p.dataset.pane === key); });
+      });
+    });
+  })();
+</script>
 </body>
 </html>
