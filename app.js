@@ -39,6 +39,18 @@
     });
   }
 
+  // ---------- Parent toggle (expandable sidebar sections) ----------
+  document.querySelectorAll('[data-action="toggle-children"]').forEach(function(parent) {
+    parent.addEventListener('click', function(e) {
+      e.preventDefault();
+      parent.classList.toggle('open');
+      var next = parent.nextElementSibling;
+      if (next && next.classList.contains('nav-children')) {
+        next.classList.toggle('open');
+      }
+    });
+  });
+
   // ---------- Stub links ----------
   document.querySelectorAll('a[data-stub="true"]').forEach(function(a) {
     a.addEventListener('click', function(e) {

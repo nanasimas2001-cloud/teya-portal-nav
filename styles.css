@@ -1,8 +1,17 @@
 /* Multi-file additions: reset anchors used as nav items */
 a { text-decoration: none; color: inherit; }
-.nav-item, .control-btn, .biz-menu-item, .variant-card { text-decoration: none; color: inherit; }
+.nav-item, .control-btn, .biz-menu-item, .variant-card, .nav-child { text-decoration: none; color: inherit; }
 .sidebar.collapsed-search .nav-icon { width: 22px; height: 22px; }
 .sidebar.collapsed-search .icon-only { padding: 12px 0; }
+/* Expandable parent nav items */
+.nav-item.parent { cursor: pointer; }
+.nav-item.parent::after { transition: transform 0.15s ease; }
+.nav-item.parent.open::after { transform: rotate(90deg); }
+.nav-children { display: none; padding: 2px 0 6px 28px; }
+.nav-children.open { display: block; }
+.nav-child { display: block; padding: 6px 10px; font-size: 12.5px; color: var(--teya-ink-2); border-radius: 4px; cursor: pointer; }
+.nav-child:hover { background: var(--teya-surface); color: var(--teya-ink); }
+.nav-child.active { color: var(--teya-ink); font-weight: 500; background: var(--teya-surface); }
 
 :root {
     --teya-yellow: #E8FF4D;

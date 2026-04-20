@@ -31,6 +31,7 @@ ICONS = {
     "transactions":        '<path d="M4 4h16v4H4zM4 12h16v4H4zM4 20h8"/>',
     "payment links":       '<path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/>',
     "subscriptions":       '<rect x="2" y="4" width="20" height="16" rx="2"/><path d="M8 2v4M16 2v4M2 10h20"/>',
+    "products and pricing": '<path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/>',
     "money":               '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/>',
     "money overview":      '<rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/>',
     "settlements":         '<path d="M12 2v20M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>',
@@ -219,10 +220,16 @@ def rewrite_sidebar_links(aside_inner, current_page):
         classes = match.group(1) or ""
         attrs = match.group(2) or ""
         body = match.group(3) or ""
+        label = label_of_nav_item(body)
+        # Parents stay as <div> buttons that toggle children (no nav)
+        if "parent" in classes:
+            cls = re.sub(r"\bactive\b", "", classes).strip()
+            new_body = replace_icon_in_body(body, label)
+            # Auto-open parent if current page matches one of its children (set below based on context)
+            return f'<div class="{cls}" data-action="toggle-children" data-parent-label="{label}">{new_body}</div>'
         # Extract onclick handler if any (e.g., selectPage('settings'))
         onclick_m = re.search(r'onclick="([^"]+)"', attrs)
         onclick = onclick_m.group(1) if onclick_m else ""
-        label = label_of_nav_item(body)
         # Determine href — selectPage('settings') handler wins over label mapping
         if "selectPage('settings')" in onclick:
             href = "./settings.html"
@@ -233,11 +240,7 @@ def rewrite_sidebar_links(aside_inner, current_page):
         cls = re.sub(r"\bactive\b", "", classes).strip()
         if not is_stub and href == f"./{current_page}.html":
             cls = (cls + " active").strip()
-        # Preserve data-roles if present (for B3)
         new_attrs = ""
-        m_roles = re.search(r'data-roles="([^"]*)"', full)
-        if m_roles:
-            new_attrs += f' data-roles="{m_roles.group(1)}"'
         stub_attr = ' data-stub="true"' if is_stub else ""
         # Replace the SVG's inner markup with the canonical icon for this label
         new_body = replace_icon_in_body(body, label)
@@ -248,6 +251,64 @@ def rewrite_sidebar_links(aside_inner, current_page):
     aside_inner = re.sub(
         r'<div class="(nav-item[^"]*)"([^>]*)>((?:(?!</div>).)*?)</div>',
         rewrite_nav_item,
+        aside_inner,
+        flags=re.S,
+    )
+
+    # Rewrite nav-children blocks: each .nav-child becomes an anchor.
+    # Special-case labels: Overview → sales.html (Sales parent); otherwise map_label_to_href.
+    def rewrite_children_block(match):
+        inner = match.group(1)
+        def rewrite_child(cm):
+            label = label_of_nav_item(cm.group(1))
+            lbl = label.lower().strip()
+            if lbl == "overview":
+                href, is_stub = "./sales.html", False
+            else:
+                href, is_stub = map_label_to_href(label)
+            active_cls = " active" if not is_stub and href == f"./{current_page}.html" else ""
+            stub_attr = ' data-stub="true"' if is_stub else ""
+            return f'<a class="nav-child{active_cls}" href="{href}"{stub_attr}>{label}</a>'
+        new_inner = re.sub(
+            r'<div class="nav-child"[^>]*>(.*?)</div>',
+            rewrite_child,
+            inner,
+            flags=re.S,
+        )
+        # Mark the block open if it contains an active child (so page loads already expanded)
+        open_cls = " open" if 'nav-child active' in new_inner else ""
+        return f'<div class="nav-children{open_cls}">{new_inner}</div>'
+
+    aside_inner = re.sub(
+        r'<div class="nav-children"[^>]*>((?:\s*<div class="nav-child"[^>]*>.*?</div>)+\s*)</div>',
+        rewrite_children_block,
+        aside_inner,
+        flags=re.S,
+    )
+
+    # After children rewrite, auto-open the preceding parent if its children block is open.
+    # We do this by walking the HTML and marking any parent whose *immediately following*
+    # nav-children block has the 'open' class.
+    def open_matching_parent(match):
+        parent_html = match.group(1)
+        following = match.group(2)
+        if 'class="nav-children open"' in following:
+            parent_html = parent_html.replace(
+                'data-action="toggle-children"',
+                'data-action="toggle-children" data-open="true"',
+                1,
+            )
+            parent_html = re.sub(
+                r'class="([^"]*parent[^"]*)"',
+                lambda m: f'class="{m.group(1)} open"',
+                parent_html,
+                count=1,
+            )
+        return parent_html + following
+
+    aside_inner = re.sub(
+        r'(<div class="[^"]*parent[^"]*"[^>]*>(?:(?!</div>).)*</div>)(\s*<div class="nav-children[^"]*"[^>]*>(?:(?!</div>).)*</div>)',
+        open_matching_parent,
         aside_inner,
         flags=re.S,
     )
@@ -511,6 +572,18 @@ APP_JS = """(function() {
     });
   }
 
+  // ---------- Parent toggle (expandable sidebar sections) ----------
+  document.querySelectorAll('[data-action="toggle-children"]').forEach(function(parent) {
+    parent.addEventListener('click', function(e) {
+      e.preventDefault();
+      parent.classList.toggle('open');
+      var next = parent.nextElementSibling;
+      if (next && next.classList.contains('nav-children')) {
+        next.classList.toggle('open');
+      }
+    });
+  });
+
   // ---------- Stub links ----------
   document.querySelectorAll('a[data-stub="true"]').forEach(function(a) {
     a.addEventListener('click', function(e) {
@@ -537,9 +610,18 @@ def main():
     css_prefix = (
         "/* Multi-file additions: reset anchors used as nav items */\n"
         "a { text-decoration: none; color: inherit; }\n"
-        ".nav-item, .control-btn, .biz-menu-item, .variant-card { text-decoration: none; color: inherit; }\n"
+        ".nav-item, .control-btn, .biz-menu-item, .variant-card, .nav-child { text-decoration: none; color: inherit; }\n"
         ".sidebar.collapsed-search .nav-icon { width: 22px; height: 22px; }\n"
-        ".sidebar.collapsed-search .icon-only { padding: 12px 0; }\n\n"
+        ".sidebar.collapsed-search .icon-only { padding: 12px 0; }\n"
+        "/* Expandable parent nav items */\n"
+        ".nav-item.parent { cursor: pointer; }\n"
+        ".nav-item.parent::after { transition: transform 0.15s ease; }\n"
+        ".nav-item.parent.open::after { transform: rotate(90deg); }\n"
+        ".nav-children { display: none; padding: 2px 0 6px 28px; }\n"
+        ".nav-children.open { display: block; }\n"
+        ".nav-child { display: block; padding: 6px 10px; font-size: 12.5px; color: var(--teya-ink-2); border-radius: 4px; cursor: pointer; }\n"
+        ".nav-child:hover { background: var(--teya-surface); color: var(--teya-ink); }\n"
+        ".nav-child.active { color: var(--teya-ink); font-weight: 500; background: var(--teya-surface); }\n\n"
     )
     (ROOT / "styles.css").write_text(css_prefix + css, encoding="utf-8")
 
