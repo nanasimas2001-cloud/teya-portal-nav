@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teya portal · D · Back office · home</title>
+<link rel="stylesheet" href="../styles.css">
+</head>
+<body data-variant="D" data-page="home">
+
+<div class="control-bar">
+  <h1>Teya portal — nav <span>v6 · multi-file</span></h1>
+  <div style="display:flex;gap:8px;flex-wrap:wrap;">
+    <div class="control-group">
+      <a class="control-btn" data-opt="A" data-current-page="home" href="../a/home.html">A</a>
+      <a class="control-btn" data-opt="B" data-current-page="home" href="../b/home.html">B</a>
+      <a class="control-btn" data-opt="C" data-current-page="home" href="../c/home.html">C</a>
+    
+      <a class="control-btn active" data-opt="D" data-current-page="home" href="../d/home.html">D</a>
+    </div>
+  </div>
+  <div class="controls-right">
+    <button class="toggle-btn" id="annotBtn" type="button">Show data signals</button>
+  </div>
+</div>
+
+<div class="legend-strip">
+  <strong>Annotations on.</strong>
+  <span>Purple tags = data signals behind each placement.</span>
+</div>
+
+<div class="biz-modal-backdrop" id="bizModal">
+  <div class="biz-modal">
+    <div class="biz-modal-close" data-action="close-biz-modal">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 6L6 18M6 6l12 12"/></svg>
+    </div>
+    <div class="biz-hero">
+      <div class="biz-hero-avatar">🧅</div>
+      <div class="biz-hero-name">Onion Garden</div>
+      <div class="biz-hero-sub">Starter plan · 4 stores</div>
+    </div>
+    <div class="biz-featured">
+      <div class="biz-feature-card">
+        <div class="biz-feature-icon plan"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/></svg></div>
+        <div class="biz-feature-title">Starter plan</div>
+        <div class="biz-feature-sub">Your plan</div>
+      </div>
+      <div class="biz-feature-card">
+        <div class="biz-feature-machine"></div>
+        <div class="biz-feature-title">Card machines</div>
+        <div class="biz-feature-sub">4 units</div>
+      </div>
+    </div>
+    <div class="biz-menu-group">
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18l-2 13H5L3 7z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Stores <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7M5 10v11M19 10v11M9 21V14h6v7"/></svg>Bank accounts <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/></svg>Teams and permissions <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/></svg>Integrations <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M16 13H8M16 17H8"/></svg>Financial documents <span class="chev">›</span></div>
+    </div>
+    <div class="biz-menu-group">
+      <a class="biz-menu-item" href="./settings.html"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82"/></svg>Settings <span class="chev">›</span></a>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Help <span class="chev">›</span></div>
+      <div class="biz-menu-item"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4M16 17l5-5-5-5M21 12H9"/></svg>Logout <span class="chev">›</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="portal-frame active" id="frame-D">
+  <aside class="sidebar">
+
+    <div class="sidebar-logo"><div class="logo-mark">T</div><div class="logo-text">Teya</div></div>
+    <div class="biz-switcher" data-action="open-biz-modal">
+      <div class="biz-avatar">🧅</div>
+      <div class="biz-info"><div class="biz-name">Onion Garden</div><div class="biz-sub">Starter · 4 stores</div></div>
+      <div class="biz-chev">⌄</div>
+    </div>
+    <a class="nav-item active" href="./home.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 4l9 8v9a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1v-9z"/></svg>Home</a>
+    <div class="nav-section-label">Operations</div>
+    <a class="nav-item" href="./sales.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="6" width="4" height="15"/><rect x="17" y="9" width="4" height="12"/></svg>Sales</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v4H4zM4 12h16v4H4zM4 20h8"/></svg>Transactions</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>Payment links</a>
+    <div class="nav-section-label">Money</div>
+    <a class="nav-item" href="./money.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/></svg>Money overview</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 21h18M3 10l9-7 9 7M5 10v11M19 10v11M9 21V14h6v7"/></svg>Bank accounts</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 1l4 4-4 4M3 11V9a4 4 0 014-4h14M7 23l-4-4 4-4M21 13v2a4 4 0 01-4 4H3"/></svg>Transfers</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/></svg>Funding</a>
+    <div class="nav-section-label">Business</div>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87"/><path d="M16 3.13a4 4 0 010 7.75"/></svg>Teams and permissions<span class="annot">plural</span></a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 7h18l-2 13H5L3 7z"/><path d="M8 7V5a2 2 0 012-2h4a2 2 0 012 2v2"/></svg>Stores</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M12 3v18M3 12h18"/></svg>Integrations</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.59 13.41l-7.17 7.17a2 2 0 01-2.83 0L2 12V2h10l8.59 8.59a2 2 0 010 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>Products and pricing<span class="badge">NEW</span></a>
+    <div class="nav-section-label">Records & insights</div>
+    <a class="nav-item" href="./financial-documents.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><path d="M14 2v6h6M9 13h6M9 17h4"/></svg>Financial documents<span class="annot">statements + Teya fee invoices</span></a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h10M7 12h10M7 16h6"/></svg>Reports</a>
+    <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.39 5.82L20 10l-4.47 3.88L17 20l-5-3-5 3 1.47-6.12L4 10l5.61-1.18z"/></svg>Teya AI</a>
+    <div class="sidebar-footer">
+      <a class="nav-item" href="./settings.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 00.33 1.82l.06.06a2 2 0 11-2.83 2.83l-.06-.06a1.65 1.65 0 00-1.82-.33 1.65 1.65 0 00-1 1.51V21a2 2 0 01-4 0v-.09a1.65 1.65 0 00-1-1.51 1.65 1.65 0 00-1.82.33l-.06.06a2 2 0 11-2.83-2.83l.06-.06a1.65 1.65 0 00.33-1.82 1.65 1.65 0 00-1.51-1H3a2 2 0 010-4h.09a1.65 1.65 0 001.51-1 1.65 1.65 0 00-.33-1.82l-.06-.06a2 2 0 012.83-2.83l.06.06a1.65 1.65 0 001.82.33h0a1.65 1.65 0 001-1.51V3a2 2 0 014 0v.09a1.65 1.65 0 001 1.51h0a1.65 1.65 0 001.82-.33l.06-.06a2 2 0 012.83 2.83l-.06.06a1.65 1.65 0 00-.33 1.82v0a1.65 1.65 0 001.51 1H21a2 2 0 010 4h-.09a1.65 1.65 0 00-1.51 1z"/></svg>Settings</a>
+      <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3M12 17h.01"/></svg>Help</a>
+    </div>
+  
+  </aside>
+  <main class="main">
+<div class="page-home active">
+      <div class="content-header">
+        <div><h2 class="content-title">Good afternoon, Nana</h2><div class="content-sub">Monday, 20 April · Onion Garden · 4 stores</div></div>
+        <div class="page-actions"><div class="avatar-sm">NN</div></div>
+      </div>
+      <div class="ai-cta">
+        <div class="ai-cta-spark">✦</div>
+        <input placeholder='Ask Teya AI — "compare stores this week"' />
+        <button class="ai-cta-icon"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="2" width="6" height="12" rx="3"/></svg></button>
+        <button class="ai-cta-send"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4 20-7z"/></svg></button>
+      </div>
+      <div class="ai-chips">
+        <div class="ai-chip">Why is basket down 80p?</div>
+        <div class="ai-chip">Download November statement</div>
+        <div class="ai-chip">Compare stores this week</div>
+      </div>
+      <div class="hero-row">
+        <div class="hero-left">
+          <div class="hero-label">Available balance · Bank account</div>
+          <div class="hero-value">£26,639.99</div>
+          <div class="hero-actions"><button class="btn-primary">Sell</button><button class="btn-secondary">Pay</button><button class="btn-secondary">Pay by link</button></div>
+        </div>
+      </div>
+      <div class="with-rail">
+        <div>
+          <div class="stat-grid">
+            <div class="stat-card"><div class="stat-head"><span class="stat-label">Gross sales today</span><span class="live-dot">Live</span></div><div class="stat-value">£2,653.92</div><div class="stat-sub">123 transactions</div></div>
+            <div class="stat-card"><div class="stat-head"><span class="stat-label">Next settlement</span></div><div class="stat-value">£2,149.36</div><div class="stat-sub">Paid tomorrow</div></div>
+            <div class="stat-card"><div class="stat-head"><span class="stat-label">Last payout</span></div><div class="stat-value">£1,987.40</div><div class="stat-sub">Fri · Barclays ••1824</div></div>
+          </div>
+          <div class="panel">
+            <h3>Performance this week <a href="#">Open in Sales →</a></h3>
+            <div style="display:flex;gap:20px;margin-bottom:12px;flex-wrap:wrap">
+              <div><div style="font-size:11px;color:var(--teya-ink-3);text-transform:uppercase;letter-spacing:.4px">Revenue</div><div style="font-size:20px;font-weight:500">£18,432</div><div class="stat-delta-pos">↑ 12%</div></div>
+              <div><div style="font-size:11px;color:var(--teya-ink-3);text-transform:uppercase;letter-spacing:.4px">Best store</div><div style="font-size:20px;font-weight:500">Shoreditch</div></div>
+              <div><div style="font-size:11px;color:var(--teya-ink-3);text-transform:uppercase;letter-spacing:.4px">Avg basket</div><div style="font-size:20px;font-weight:500">£21.56</div><div class="stat-delta-neg">↓ £0.80</div></div>
+            </div>
+            <div class="mini-chart" style="height:90px">
+              <div class="bar" style="height:40%"></div><div class="bar" style="height:65%"></div><div class="bar" style="height:50%"></div>
+              <div class="bar" style="height:80%"></div><div class="bar" style="height:60%"></div><div class="bar" style="height:90%"></div>
+              <div class="bar dim" style="height:30%"></div>
+            </div>
+          </div>
+        </div>
+        <aside>
+          <h4 style="margin:0 0 10px;font-size:12px;font-weight:500;text-transform:uppercase;letter-spacing:.4px;color:var(--teya-ink-3)">Your business</h4>
+          <div class="biz-tiles">
+            <div class="biz-tile"><div class="biz-tile-icon plan"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L2 7l10 5 10-5z"/></svg></div><div class="biz-tile-title">Starter plan</div><div class="biz-tile-sub">Your plan</div></div>
+            <div class="biz-tile"><div class="biz-tile-machine"></div><div class="biz-tile-title">Card machines</div><div class="biz-tile-sub">4 units</div></div>
+          </div>
+          <div class="rail-section">
+            <h4>Needs review</h4>
+            <div class="rail-item"><div style="flex:1"><div style="font-weight:500">Transfer approval</div><div style="font-size:11px;color:var(--teya-ink-3)">Alex sent £520</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Review</button></div>
+            <div class="rail-item"><div style="flex:1"><div style="font-weight:500">Chargeback · £87.50</div><div style="font-size:11px;color:var(--teya-ink-3)">Due Wed</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Open</button></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../app.js"></script>
+</body>
+</html>

@@ -1,5 +1,11 @@
 # Medium merchant research — decision notes
 
+## Variant naming
+
+Original exploration used A / A2 / A3 / B to signal that A2 and A3 were variants of A's thesis. On consolidation (post-C removal), renamed to A / B / C / D for flat peer labelling. Old → new mapping: A→A, A2→B, A3→C, B→D. All references below that pre-date the rename (e.g. "Option B strengthens…" in the decision discussion) refer to the original letters and are kept as audit trail.
+
+## Source
+
 Source: Elisa Volpato, Apr 2026. 18 participants (12 Teya, 6 non-Teya), UK and Portugal. Target: businesses ≥20k/month or 10+ employees.
 
 ## Target user personas
