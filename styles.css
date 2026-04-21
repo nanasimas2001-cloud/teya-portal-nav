@@ -954,3 +954,9 @@ a { text-decoration: none; color: inherit; }
 .c-meta { font-size: 12px; color: var(--teya-ink-3); margin-top: 4px; }
 .money-two-col { display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 16px; }
 @media (max-width: 900px) { .money-two-col { grid-template-columns: 1fr; } }
+/* Variant A sub-section switcher (sidebar-driven, no page tabs) */
+.sub-section { display: none; }
+.sub-section.active { display: block; }
+/* Variant D flat stacked sections */
+.flat-section { margin-bottom: 32px; }
+.flat-section-h { font-size: 16px; font-weight: 500; margin: 0 0 12px; padding-bottom: 6px; border-bottom: 1px solid var(--teya-border); }

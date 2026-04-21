@@ -78,9 +78,9 @@
     <a class="nav-item" href="./home.html"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 12L12 4l9 8v9a1 1 0 01-1 1h-5v-7h-6v7H4a1 1 0 01-1-1v-9z"/></svg>Home</a>
     <div class="nav-item parent open" data-action="toggle-children" data-open="true" data-parent-label="Sales"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="12" width="4" height="9"/><rect x="10" y="6" width="4" height="15"/><rect x="17" y="9" width="4" height="12"/></svg>Sales</div>
     <div class="nav-children open">
-      <a class="nav-child active" href="./sales.html">Overview</a>
-      <a class="nav-child" href="#" data-stub="true">Transactions</a>
-      <a class="nav-child" href="#" data-stub="true">Payment links</a>
+      <a class="nav-child active" href="./sales.html" data-section="overview">Overview</a>
+      <a class="nav-child" href="./sales.html" data-section="transactions">Transactions</a>
+      <a class="nav-child" href="./sales.html" data-section="payment-links">Payment links</a>
     </div>
     <div class="nav-item parent" data-action="toggle-children" data-parent-label="Money"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/></svg>Money</div>
     <div class="nav-children">
@@ -105,19 +105,180 @@
   
   </aside>
   <main class="main">
-<div class="content-header">
-  <div><h2 class="content-title">Sales</h2><div class="content-sub">Placeholder — content not yet built</div></div>
-  <div class="page-actions"><div class="avatar-sm">NN</div></div>
-</div>
-<div class="panel" style="margin-top:16px;padding:32px;text-align:center;">
-  <div style="font-size:13px;color:var(--teya-ink-3);text-transform:uppercase;letter-spacing:.4px;margin-bottom:6px;">Placeholder</div>
-  <div style="font-size:20px;font-weight:500;margin-bottom:8px;">Sales</div>
-  <div style="font-size:13px;color:var(--teya-ink-2);max-width:420px;margin:0 auto;">Sales dashboard placeholder — where Overview, Transactions, and Payment links would live.</div>
-</div>
+    <div class="content-header">
+      <div>
+        <h2 class="content-title">Sales</h2>
+      </div>
+      <div class="page-actions"><div class="avatar-sm">NN</div></div>
+    </div>
+    <div class="page-tabs" role="tablist">
+      <button class="page-tab active" data-tab="overview" type="button">Overview</button>
+      <button class="page-tab" data-tab="transactions" type="button">Transactions</button>
+      <button class="page-tab" data-tab="payment-links" type="button">Payment links</button>
+    </div>
 
+    <div class="tab-pane active" data-pane="overview">
+      <div class="panel" style="padding: 28px; text-align:center;">
+        <div style="font-size:13px; color:var(--teya-ink-3); text-transform:uppercase; letter-spacing:.4px; margin-bottom:6px;">Placeholder</div>
+        <div style="font-size:18px; font-weight:500; margin-bottom:6px;">Overview content placeholder</div>
+        <div style="font-size:13px; color:var(--teya-ink-2); max-width:420px; margin:0 auto;">Reuses A's home stats (gross sales today, next settlement, last payout) plus the mobile Overview's day-by-day chart and top-transactions list, widened for desktop.</div>
+      </div>
+    </div>
+
+    <div class="tab-pane" data-pane="transactions">
+      <div class="panel" style="padding: 28px; text-align:center;">
+        <div style="font-size:13px; color:var(--teya-ink-3); text-transform:uppercase; letter-spacing:.4px; margin-bottom:6px;">Placeholder</div>
+        <div style="font-size:18px; font-weight:500; margin-bottom:6px;">Transactions content placeholder</div>
+        <div style="font-size:13px; color:var(--teya-ink-2); max-width:420px; margin:0 auto;">Paginated table with columns for time / customer / store / status / amount / refund control. Desktop gets sortable headers, multi-column filters, and CSV export.</div>
+      </div>
+    </div>
+
+    <div class="tab-pane" data-pane="payment-links">
+      <div class="stats-bar">
+        <div class="stat-card">
+          <div class="stat-head"><span class="stat-label">Total this month</span></div>
+          <div class="stat-value">£812.55</div>
+          <div class="stat-sub">across 9 links</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head"><span class="stat-label">Paid</span></div>
+          <div class="stat-value">6</div>
+          <div class="stat-sub">£684.50 collected</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head"><span class="stat-label">Active</span></div>
+          <div class="stat-value">2</div>
+          <div class="stat-sub">awaiting payment</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-head"><span class="stat-label">Expired</span></div>
+          <div class="stat-value">1</div>
+          <div class="stat-sub">not paid</div>
+        </div>
+      </div>
+
+      <div class="filter-row">
+        <button class="time-pill" type="button">This month <span class="chev">⌄</span></button>
+        <button class="time-pill outline" type="button">Status: All <span class="chev">⌄</span></button>
+        <div class="spacer"></div>
+        <div class="filter-search">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="M21 21l-4.35-4.35"/></svg>
+          <input type="text" placeholder="Search customer, note, amount" />
+        </div>
+        <button class="btn-export" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export
+        </button>
+      </div>
+
+      <div class="bulk-toolbar" id="bulkBar">
+        <span class="bulk-count" id="bulkCount">0 selected</span>
+        <div class="spacer"></div>
+        <button type="button">Resend</button>
+        <button type="button">Cancel</button>
+        <button type="button">Export selected</button>
+      </div>
+
+      <div class="sales-list-group">
+        <div class="sales-list-day"><span>Monday, 20 April 2026</span><span class="day-total">£275.00</span></div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Chloe Martin — Corporate coffee order</div>
+            <div class="sli-sub">chloe.martin@northside-studios.co.uk · link sent 10:37 · paid 11:02</div>
+          </div>
+          <span class="sli-status paid">Paid</span>
+          <span class="sli-amount">£150.00</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Alicia Duran — Tasting event deposit</div>
+            <div class="sli-sub">alicia@bloomsburycatering.com · link sent 09:14 · awaiting payment</div>
+          </div>
+          <span class="sli-status active">Active</span>
+          <span class="sli-amount">£125.00</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+      </div>
+
+      <div class="sales-list-group">
+        <div class="sales-list-day"><span>Sunday, 19 April 2026</span><span class="day-total">£92.40</span></div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Peter Holloway — Sunday farmers' market stall</div>
+            <div class="sli-sub">peter.h@hollowaydeli.uk · link sent 08:45 · paid 09:02</div>
+          </div>
+          <span class="sli-status paid">Paid</span>
+          <span class="sli-amount">£45.00</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Reine Okonkwo — Cake pre-order balance</div>
+            <div class="sli-sub">reine.okonkwo@gmail.com · link sent 10:12 · paid 10:40</div>
+          </div>
+          <span class="sli-status paid">Paid</span>
+          <span class="sli-amount">£47.40</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+      </div>
+
+      <div class="sales-list-group">
+        <div class="sales-list-day"><span>Saturday, 18 April 2026</span><span class="day-total">£445.15</span></div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Julian Vance — Weekly subscription box</div>
+            <div class="sli-sub">julian.vance@atelier-seven.co.uk · link sent 16:22 · paid 16:30</div>
+          </div>
+          <span class="sli-status paid">Paid</span>
+          <span class="sli-amount">£120.00</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Mira Halvorsen — Birthday party catering</div>
+            <div class="sli-sub">m.halvorsen@nordic-events.no · link sent 11:48 · paid 14:10</div>
+          </div>
+          <span class="sli-status paid">Paid</span>
+          <span class="sli-amount">£242.50</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+        <div class="sales-list-item" data-row>
+          <span class="row-checkbox" data-check></span>
+          <div class="sli-main">
+            <div class="sli-label">Omar El-Haddad — Friday dinner booking</div>
+            <div class="sli-sub">omar@shoreditch-supper.co.uk · link sent 09:15 · expired 21 April</div>
+          </div>
+          <span class="sli-status expired">Expired</span>
+          <span class="sli-amount">£82.65</span>
+          <button class="row-actions" type="button" title="Actions">⋯</button>
+        </div>
+      </div>
+
+    </div>
   </main>
 </div>
 
 <script src="../app.js"></script>
-</body>
+<script>
+  (function() {
+    function activateTab(key) {
+      document.querySelectorAll('.page-tab').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === key); });
+      document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.toggle('active', p.dataset.pane === key); });
+      document.querySelectorAll('.nav-child[data-section]').forEach(function(n) { n.classList.toggle('active', n.dataset.section === key); });
+    }
+    document.querySelectorAll('.page-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() { activateTab(tab.dataset.tab); });
+    });
+    document.querySelectorAll('.nav-child[data-section]').forEach(function(n) {
+      n.addEventListener('click', function(e) { e.preventDefault(); activateTab(n.dataset.section); });
+    });
+  })();
+</script></body>
 </html>

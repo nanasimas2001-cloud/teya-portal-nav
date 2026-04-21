@@ -84,9 +84,9 @@
     </div>
     <div class="nav-item parent active open" data-action="toggle-children" data-parent-label="Money"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="20" height="14" rx="2"/><path d="M2 11h20M6 15h4"/></svg>Money</div>
     <div class="nav-children open">
-      <a class="nav-child active" href="./money.html">Overview</a>
-      <a class="nav-child" href="./money.html">Activity</a>
-      <a class="nav-child" href="./money.html">Reports</a>
+      <a class="nav-child active" href="./money.html" data-section="overview">Overview</a>
+      <a class="nav-child" href="./money.html" data-section="activity">Activity</a>
+      <a class="nav-child" href="./money.html" data-section="reports">Reports</a>
     </div>
     <a class="nav-item" href="#" data-stub="true"><svg class="nav-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3l2.39 5.82L20 10l-4.47 3.88L17 20l-5-3-5 3 1.47-6.12L4 10l5.61-1.18z"/></svg>Teya AI</a>
 
@@ -111,7 +111,14 @@
       </div>
       <div class="page-actions"><div class="avatar-sm">NN</div></div>
     </div>
-    <div class="filter-row">
+    <div class="page-tabs" role="tablist">
+      <button class="page-tab active" data-tab="overview" type="button">Overview</button>
+      <button class="page-tab" data-tab="activity" type="button">Activity</button>
+      <button class="page-tab" data-tab="reports" type="button">Reports</button>
+    </div>
+
+    <div class="tab-pane active" data-pane="overview">
+      <div class="filter-row">
         <button class="time-pill" type="button">This month <span class="chev">⌄</span></button>
         <div class="spacer"></div>
         <button class="btn-export" type="button">
@@ -174,9 +181,58 @@
         <div class="activity-item"><div class="activity-avatar" style="background:#9FE1CB; color:#085041;">FN</div><div class="activity-info"><div class="activity-name">Funding top-up</div><div class="activity-meta">15 Apr · Advance disbursement</div></div><div class="activity-amount amount-pos">+£3,000.00</div></div>
         <div class="activity-item"><div class="activity-avatar" style="background:#F7C1C1; color:#501313;">TP</div><div class="activity-info"><div class="activity-name">Transfers paid out</div><div class="activity-meta">22 supplier payments · avg £186</div></div><div class="activity-amount">−£4,090.20</div></div>
       </div>
-</main>
+    </div>
+
+    <div class="tab-pane" data-pane="activity">
+      <div class="panel" style="padding: 28px; text-align:center;">
+        <div style="font-size:13px; color:var(--teya-ink-3); text-transform:uppercase; letter-spacing:.4px; margin-bottom:6px;">Placeholder</div>
+        <div style="font-size:18px; font-weight:500; margin-bottom:6px;">Activity content placeholder</div>
+        <div style="font-size:13px; color:var(--teya-ink-2); max-width:480px; margin:0 auto;">Transaction list grouped by date — same visual pattern as Payment links on the Sales page, but filtered to account money flows (settlements in, transfers out, card spend, funding events). Desktop gets bulk export and multi-select reconciliation.</div>
+      </div>
+    </div>
+    <div class="tab-pane" data-pane="reports">
+      <div class="filter-row">
+        <button class="time-pill" type="button">This month <span class="chev">⌄</span></button>
+        <button class="time-pill outline" type="button">All reports <span class="chev">⌄</span></button>
+        <div class="spacer"></div>
+        <button class="btn-export" type="button">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+          Export
+        </button>
+      </div>
+
+      <div class="panel">
+        <h3>Saved reports</h3>
+        <div class="activity-item"><div class="activity-avatar" style="background:var(--teya-yellow); color:var(--teya-black);">ST</div><div class="activity-info"><div class="activity-name">Daily settlement summary</div><div class="activity-meta">Auto-generated · last sent 08:00, 20 Apr</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Download</button></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#CECBF6; color:#3C3489;">VA</div><div class="activity-info"><div class="activity-name">VAT quarter pack</div><div class="activity-meta">Q1 2026 · ready to share with accountant</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Download</button></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#9FE1CB; color:#085041;">SA</div><div class="activity-info"><div class="activity-name">Sales by store</div><div class="activity-meta">Last 30 days · CSV with per-terminal breakdown</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Download</button></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#FAC775; color:#633806;">RF</div><div class="activity-info"><div class="activity-name">Refunds report</div><div class="activity-meta">April · 12 refunds totalling £342.60</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Download</button></div>
+        <div class="activity-item"><div class="activity-avatar" style="background:#F7C1C1; color:#501313;">CH</div><div class="activity-info"><div class="activity-name">Chargebacks</div><div class="activity-meta">Open disputes and responses required</div></div><button class="btn-secondary" style="padding:5px 12px;font-size:11px">Download</button></div>
+      </div>
+
+      <div class="panel" style="margin-top:12px;">
+        <h3>Build your own</h3>
+        <div style="font-size:12px; color:var(--teya-ink-2); margin-bottom:10px;">Combine date range, store, terminal, payment type, and export format. Save combinations as recurring reports.</div>
+        <button class="btn-primary" style="padding:7px 14px; font-size:12px;">New report</button>
+      </div>
+    </div>
+  </main>
 </div>
 
 <script src="../app.js"></script>
-</body>
+<script>
+  (function() {
+    function activateTab(key) {
+      document.querySelectorAll('.page-tab').forEach(function(t) { t.classList.toggle('active', t.dataset.tab === key); });
+      document.querySelectorAll('.tab-pane').forEach(function(p) { p.classList.toggle('active', p.dataset.pane === key); });
+      document.querySelectorAll('.nav-child[data-section]').forEach(function(n) { n.classList.toggle('active', n.dataset.section === key); });
+    }
+    document.querySelectorAll('.page-tab').forEach(function(tab) {
+      tab.addEventListener('click', function() { activateTab(tab.dataset.tab); });
+    });
+    document.querySelectorAll('.nav-child[data-section]').forEach(function(n) {
+      n.addEventListener('click', function(e) { e.preventDefault(); activateTab(n.dataset.section); });
+    });
+  })();
+</script></body>
 </html>
